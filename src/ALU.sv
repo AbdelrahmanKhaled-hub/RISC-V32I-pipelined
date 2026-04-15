@@ -1,11 +1,11 @@
 //ALU module
 
-module ALU (SrcA, SrcB, ALUControl, zero, ALUResult);
+module ALU (SrcA, SrcB, ALUControl, ALUResult, Zero);
 
 input logic [2:0] ALUControl;
 input logic [31:0] SrcA,SrcB;
 output logic signed [31:0] ALUResult;
-output logic zero;
+output logic Zero;
 
 always_comb begin 
 
@@ -24,6 +24,6 @@ case(ALUControl)                                            //Some operations wi
 endcase
 end 
 
-assign zero=(ALUResult==0)? 1'b1 : 1'b0;                    //Zero flag
+assign Zero = (ALUResult==0)? 1'b1 : 1'b0;                    //Zero flag
 
 endmodule

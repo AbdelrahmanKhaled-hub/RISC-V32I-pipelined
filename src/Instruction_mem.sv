@@ -1,8 +1,10 @@
 //Instruction Memory 
 
-module instruction_mem(rst,A,Instr);
-    input bit rst;
-    input logic [31:0] A;
+module instruction_mem(clk, A, we, data, Instr);
+    input  logic        clk;
+    input  logic [31:0] A;
+    input  logic        we;
+    input logic [31:0]  data; 
     output logic [31:0] Instr;
 
     localparam WIDTH = 32;                            //Width of the Mem
@@ -13,10 +15,9 @@ module instruction_mem(rst,A,Instr);
 
     initial $readmemh("Inst_mem_init.dat",instruction_memory);
 
-    always@(*) begin
-        if(~rst)
-            Instr=0;
-        else
-            Instr = instruction_memory[A[31:2]]; //word alligned
+    always@(posedge clk) begin
+        if(we)
+            instruction_memory[A[31:2]] <= data; //word alligned
     end
+    assign Instr = instruction_memory [A[31:2]];
 endmodule

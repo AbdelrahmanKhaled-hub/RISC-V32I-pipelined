@@ -3,8 +3,7 @@
 module Control_Unit(
     input [6:0] op ,
     input [2:0] funct3 ,
-    input funct7 , Zero ,
-    output PCSrc ,
+    input funct7 ,
     output reg MemWrite , ALUSrc , RegWrite , Jump , Branch ,
     output reg [1:0] ImmSrc , ResultSrc , 
     output reg [2:0] ALUControl
@@ -107,5 +106,4 @@ always @(*) begin
         default : ALUControl = 3'b000 ; //default is add
     endcase
 end
-assign PCSrc = (Jump | (Branch & Zero)) ; //PCSrc flag 
 endmodule
